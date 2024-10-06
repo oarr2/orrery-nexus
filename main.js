@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/controls/OrbitControls.js";
 import earthRotationxy from './circular_points.csv'
-import { updateEarthPosition, earthMeshBuilder } from './earth'
+import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './earth'
 console.log(earthRotationxy)
 
 
@@ -40,6 +40,8 @@ scene.add(sunMesh);
 //earth geometry + material = mesh
 const earthMesh = earthMeshBuilder()
 scene.add(earthMesh);
+const moonGroup = moonGroupBuilder()
+scene.add(moonGroup)
 
 //light
 const color = 0xFFFFFF;
@@ -55,6 +57,7 @@ function animate() {
     sunMesh.rotation.x += 0.001
 
     updateEarthPosition(earthMesh)
+    updateMoonPosition(moonGroup)
     
     renderer.render(scene, camera);
     
