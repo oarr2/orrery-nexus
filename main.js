@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/controls/OrbitControls.js";
 
-import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './public/objects/earth'
-import { sunMeshBuilder, updateSunPosition } from './public/objects/sun';
-import { generateStarfield } from './public/objects/starfield';
+import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './objects/earth'
+import { sunMeshBuilder, updateSunPosition } from './objects/sun';
+import { generateStarfield } from './objects/starfield';
 
 
 

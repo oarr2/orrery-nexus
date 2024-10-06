@@ -5,6 +5,6 @@ export default defineConfig({
     plugins: [
         dsv()
     ],
-    base: "/"
+    base: "/orrery-nexus"
   
 })
