@@ -8,7 +8,7 @@ const loader = new THREE.TextureLoader()
 export function earthMeshBuilder() {
     const geometry = new THREE.IcosahedronGeometry(1, 12);
     const material = new THREE.MeshPhongMaterial({
-        map: loader.load("../objectAssets/earthmap1k.jpg"),
+        map: loader.load("./objectAssets/earthmap1k.jpg"),
         //color: 0x44aa88,
         //flatShading: true
     });
@@ -23,7 +23,7 @@ export function earthMeshBuilder() {
 export function moonMeshBuilder() {
     const geometry = new THREE.IcosahedronGeometry(1, 12);
     const material = new THREE.MeshStandardMaterial({
-        map: loader.load("../objectAssets/moonbump1k.jpg"),
+        map: loader.load("./objectAssets/moonbump1k.jpg"),
         
         //color: 0x44aa88,
         //flatShading: true

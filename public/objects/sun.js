@@ -5,7 +5,7 @@ export function sunMeshBuilder() {
     //sun geometry + material = mesh
     const sunGeometry = new THREE.IcosahedronGeometry(8, 12);
     const sunMaterial = new THREE.MeshPhongMaterial({
-        map: loader.load("../objectAssets/sunmap.jpg"),
+        map: loader.load("./objectAssets/sunmap.jpg"),
         //color: 0xFFFF00,
         //flatShading: true
     });
