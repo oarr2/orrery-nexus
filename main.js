@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/controls/OrbitControls.js";
 
 import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './public/objects/earth'
+import { sunMeshBuilder, updateSunPosition } from './public/objects/sun';
+import { generateStarfield } from './public/objects/starfield';
 
 
 
@@ -17,7 +19,7 @@ const aspect = w/h;
 const near = 0.1;
 const far = 1000;
 let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 10;
+camera.position.z = 40;
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setSize(w, h)
@@ -45,15 +47,18 @@ function onMouseClick(event) {
     const intersects = raycaster.intersectObjects(scene.children)
     if(intersects.length > 0) {
         const targetMesh = intersects[0].object;
+        targetMesh.geometry.computeBoundingSphere();
         zoomToMesh(targetMesh)
         console.log(targetMesh.name)
         showInfoArea(targetMesh.name, targetMesh.userData)
     }
 }
-
+let radious = 0
 function zoomToMesh(targetMesh) {
     isZooming = true;
     zoomTargetPosition = new THREE.Vector3().copy(targetMesh.position);
+    radious = targetMesh.geometry.boundingSphere.radius;
+    console.log("rr",radious)
     //console.log(zoomTargetPosition.getComponent(0))
     //zoomTargetPosition.add(new THREE.Vector3(0, 0, 0))
         
@@ -85,21 +90,15 @@ function showInfoArea(title, info) {
 }
 //close info area
 document.getElementById('closeButton').addEventListener('click', () => {
+    zoomOut()
     const infoArea = document.getElementById('infoArea')
     infoArea.style.display = 'none';
-    zoomOut()
+    
 })
 
 
 //sun geometry + material = mesh
-const sunGeometry = new THREE.IcosahedronGeometry(2, 2);
-const sunMaterial = new THREE.MeshPhongMaterial({
-    color: 0xFFFF00,
-    flatShading: true
-});
-const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
-sunMesh.name = "Sun"
-sunMesh.userData = "this is the sun data"
+const sunMesh = sunMeshBuilder()
 scene.add(sunMesh);
 
 //earth geometry + material = mesh
@@ -108,18 +107,27 @@ scene.add(earthMesh);
 const moonGroup = moonGroupBuilder()
 scene.add(moonGroup)
 
-//light
-const color = 0xFFFFFF;
-const intensity = 3;
-const light = new THREE.DirectionalLight(color, intensity);
-light.position.set(-1, 2, 4);
-scene.add(light);
+//starfield
+const stars = generateStarfield(200)
+scene.add(stars)
+
+//directional light
+// const color = 0xFFFFFF;
+// const intensity = 2;
+// const light = new THREE.DirectionalLight(color, intensity);
+// light.position.set(0, 0, 4);
+// scene.add(light);
+
+//global light
+const light = new THREE.AmbientLight( 0xFFFFFF );
+light.intensity = 3
+scene.add(light)
+
 
 //loop to animate the scene
 function animate() {
     requestAnimationFrame(animate);
-    sunMesh.rotation.y += 0.001
-    sunMesh.rotation.x += 0.001
+    updateSunPosition(sunMesh)
 
     updateEarthPosition(earthMesh)
     updateMoonPosition(moonGroup)
@@ -132,7 +140,8 @@ function animate() {
         camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
         camera.position.x = zoomTargetPosition.getComponent(0)
         camera.position.y = zoomTargetPosition.getComponent(1)
-        camera.position.z = 4
+        //zoom dynamically with the radious of the mesh selected
+        camera.position.z = radious + (radious*0.9)
 
         if(camera.position.distanceTo(zoomTargetPosition) < 5) {
              isZooming =false

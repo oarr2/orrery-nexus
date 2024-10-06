@@ -4,18 +4,18 @@ import math
 import csv
 
 #radius of 2
-r = 10
+r = 25
 y = - r
 data = [['x', 'y']]
 data2 = []
 while y <= r:
     x = math.sqrt(r*r - y*y)
-    x = math.ceil(x * 1000)/1000
+    x = math.ceil(x * 10000)/10000
     data.append([x,y])
     if x != 0:
         data2.append([-x,y])
-    y+=0.008
-    y = math.ceil(y * 1000)/1000
+    y+=0.0008
+    y = math.ceil(y * 10000)/10000
 data2 = data2[::-1]
 data = data + data2
 print(data)

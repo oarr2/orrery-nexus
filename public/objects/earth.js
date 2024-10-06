@@ -4,11 +4,13 @@ import rotationxy from '../dataPoints/circular_points.csv'
 //earth geometry + material = mesh
 let index = 0
 const rotationSizeArray = Array.from(rotationxy).length
+const loader = new THREE.TextureLoader()
 export function earthMeshBuilder() {
-    const geometry = new THREE.IcosahedronGeometry(1, 2);
+    const geometry = new THREE.IcosahedronGeometry(1, 12);
     const material = new THREE.MeshPhongMaterial({
-        color: 0x44aa88,
-        flatShading: true
+        map: loader.load("../objectAssets/earthmap1k.jpg"),
+        //color: 0x44aa88,
+        //flatShading: true
     });
     const mesh = new THREE.Mesh(geometry, material);
     //position will be replaced by xy csv coordinates
@@ -19,10 +21,12 @@ export function earthMeshBuilder() {
 }
 
 export function moonMeshBuilder() {
-    const geometry = new THREE.IcosahedronGeometry(1, 2);
-    const material = new THREE.MeshPhongMaterial({
-        color: 0x44aa88,
-        flatShading: true
+    const geometry = new THREE.IcosahedronGeometry(1, 12);
+    const material = new THREE.MeshStandardMaterial({
+        map: loader.load("../objectAssets/moonbump1k.jpg"),
+        
+        //color: 0x44aa88,
+        //flatShading: true
     });
     const mesh = new THREE.Mesh(geometry, material);
     mesh.scale.setScalar(0.27)
