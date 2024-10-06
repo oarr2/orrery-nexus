@@ -3,6 +3,7 @@
     "three": "^0.169.0"
   },
   "devDependencies": {
+    "@rollup/plugin-dsv": "^3.0.5",
     "vite": "^5.4.8"
   }
 }
