@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/controls/OrbitControls.js";
 import earthRotationxy from './circular_points.csv'
+import { updateEarthPosition, earthMeshBuilder } from './earth'
 console.log(earthRotationxy)
 
 
@@ -37,16 +38,7 @@ const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
 scene.add(sunMesh);
 
 //earth geometry + material = mesh
-let earthIndex = 0
-const earthRotationSizeArray = Array.from(earthRotationxy).length
-console.log(earthRotationSizeArray)
-const earthGeometry = new THREE.IcosahedronGeometry(1, 2);
-const earthMaterial = new THREE.MeshPhongMaterial({
-    color: 0x44aa88,
-    flatShading: true
-});
-const earthMesh = new THREE.Mesh(earthGeometry, earthMaterial);
-earthMesh.position.set(5,0,0)
+const earthMesh = earthMeshBuilder()
 scene.add(earthMesh);
 
 //light
@@ -57,17 +49,12 @@ light.position.set(-1, 2, 4);
 scene.add(light);
 
 //loop to animate the scene
-console.log(earthRotationxy[earthIndex]['y'])
 function animate() {
     requestAnimationFrame(animate);
     sunMesh.rotation.y += 0.001
     sunMesh.rotation.x += 0.001
-    
-    earthMesh.position.x = earthRotationxy[earthIndex]['x']
-    earthMesh.position.y = earthRotationxy[earthIndex]['y']
-    earthIndex = (earthIndex + 1) % earthRotationSizeArray
-    //console.log(earthIndex)
-        //console.log(earthRotationxy[key]['x'])
+
+    updateEarthPosition(earthMesh)
     
     renderer.render(scene, camera);
     
