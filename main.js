@@ -1,8 +1,8 @@
 import * as THREE from 'three';
 import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/controls/OrbitControls.js";
-import earthRotationxy from './circular_points.csv'
-import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './earth'
-console.log(earthRotationxy)
+
+import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './public/objects/earth'
+
 
 
 //initial setup
@@ -45,8 +45,9 @@ function onMouseClick(event) {
     const intersects = raycaster.intersectObjects(scene.children)
     if(intersects.length > 0) {
         const targetMesh = intersects[0].object;
-        
         zoomToMesh(targetMesh)
+        console.log(targetMesh.name)
+        showInfoArea(targetMesh.name, targetMesh.userData)
     }
 }
 
@@ -63,12 +64,31 @@ let zoomOutflag = false
 window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
         zoomOut(); // Zoom out when pressing the Escape key
+        const infoArea = document.getElementById("infoArea")
+        infoArea.style.display = 'none'
     }
 });
 function zoomOut() {
     isZooming = false;
     zoomOutflag = true;
 }
+
+//show info area
+function showInfoArea(title, info) {
+    const infoArea = document.getElementById('infoArea')
+    const infoTitle = document.getElementById('infoTitle')
+    const infoContent = document.getElementById('infoContent')
+    infoTitle.textContent = title
+    infoContent.textContent = info;
+    infoArea.style.display = 'block'
+
+}
+//close info area
+document.getElementById('closeButton').addEventListener('click', () => {
+    const infoArea = document.getElementById('infoArea')
+    infoArea.style.display = 'none';
+    zoomOut()
+})
 
 
 //sun geometry + material = mesh
@@ -78,6 +98,8 @@ const sunMaterial = new THREE.MeshPhongMaterial({
     flatShading: true
 });
 const sunMesh = new THREE.Mesh(sunGeometry, sunMaterial);
+sunMesh.name = "Sun"
+sunMesh.userData = "this is the sun data"
 scene.add(sunMesh);
 
 //earth geometry + material = mesh

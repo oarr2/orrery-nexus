@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import rotationxy from './circular_points.csv'
+import rotationxy from '../dataPoints/circular_points.csv'
 
 //earth geometry + material = mesh
 let index = 0
@@ -13,6 +13,8 @@ export function earthMeshBuilder() {
     const mesh = new THREE.Mesh(geometry, material);
     //position will be replaced by xy csv coordinates
     mesh.position.set(5,0,0)
+    mesh.name = "Earth"
+    mesh.userData = "this is the earth data"
     return mesh
 }
 
