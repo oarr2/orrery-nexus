@@ -4,7 +4,7 @@ import math
 import csv
 
 #radius of 2
-r = 4
+r = 10
 y = - r
 data = [['x', 'y']]
 data2 = []
