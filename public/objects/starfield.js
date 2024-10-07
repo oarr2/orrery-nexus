@@ -7,9 +7,9 @@ export function generateStarfield(numStars) {
   
     // Randomly distribute the stars within a cube
     for (let i = 0; i < numStars; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 100; // X coordinate
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 100; // Y coordinate
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 100; // Z coordinate
+      positions[i * 3] = (Math.random() - 0.5) * 500; // X coordinate
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 500; // Y coordinate
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 500; // Z coordinate
     }
   
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));

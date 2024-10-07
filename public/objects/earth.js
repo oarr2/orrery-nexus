@@ -1,9 +1,10 @@
 import * as THREE from 'three';
-import rotationxy from '../dataPoints/circular_points.csv'
+import rotationxy from '../dataPoints/earth_points.csv'
 
 //earth geometry + material = mesh
-let index = 0
+
 const rotationSizeArray = Array.from(rotationxy).length
+let index = rotationSizeArray/2 | 0
 const loader = new THREE.TextureLoader()
 export function earthMeshBuilder() {
     const geometry = new THREE.IcosahedronGeometry(1, 12);

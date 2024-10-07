@@ -4,6 +4,9 @@ import { OrbitControls } from "https://unpkg.com/three@0.112/examples/jsm/contro
 import { updateEarthPosition, earthMeshBuilder, moonGroupBuilder, updateMoonPosition } from './public/objects/earth'
 import { sunMeshBuilder, updateSunPosition } from './public/objects/sun';
 import { generateStarfield } from './public/objects/starfield';
+import { mercuryMeshBuilder, updateMercuryPosition } from './public/objects/mercury';
+import { updateVenusPosition, venusMeshBuilder } from './public/objects/venus';
+import { deimosGroupBuilder, marsMeshBuilder, phobosGroupBuilder, updateDeimosPosition, updateMarsPosition, updatePhobosPosition } from './public/objects/mars';
 
 
 
@@ -19,7 +22,7 @@ const aspect = w/h;
 const near = 0.1;
 const far = 1000;
 let camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 40;
+camera.position.z = 60;
 //renderer
 const renderer = new THREE.WebGLRenderer({antialias: true})
 renderer.setSize(w, h)
@@ -107,8 +110,28 @@ scene.add(earthMesh);
 const moonGroup = moonGroupBuilder()
 scene.add(moonGroup)
 
+//mercury mesh
+const mercuryMesh = mercuryMeshBuilder()
+scene.add(mercuryMesh)
+
+//venus mesh
+const venusMesh = venusMeshBuilder()
+scene.add(venusMesh);
+
+//mars mesh
+const marsMesh = marsMeshBuilder()
+scene.add(marsMesh)
+
+//phobos mesh
+const phobosGroup = phobosGroupBuilder();
+scene.add(phobosGroup)
+
+//deimos mesh
+const deimosGroup = deimosGroupBuilder();
+scene.add(deimosGroup);
+
 //starfield
-const stars = generateStarfield(200)
+const stars = generateStarfield(900)
 scene.add(stars)
 
 //directional light
@@ -128,9 +151,13 @@ scene.add(light)
 function animate() {
     requestAnimationFrame(animate);
     updateSunPosition(sunMesh)
-
     updateEarthPosition(earthMesh)
     updateMoonPosition(moonGroup)
+    updateMercuryPosition(mercuryMesh)
+    updateVenusPosition(venusMesh)
+    updateMarsPosition(marsMesh)
+    updatePhobosPosition(phobosGroup)
+    updateDeimosPosition(deimosGroup)
     if (isZooming) {
         console.log(zoomTargetPosition.getComponent(0), zoomTargetPosition.getComponent(1), zoomTargetPosition.getComponent(2))
         //camera.position.lerp(zoomTargetPosition, 0.05);
