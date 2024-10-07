@@ -16,7 +16,8 @@ export function mercuryMeshBuilder() {
     //position will be replaced by xy csv coordinates
     mesh.position.set(5,0,0)
     mesh.name = "Mercury"
-    mesh.userData = "this is the mercury data"
+    mesh.userData = `The smallest planet in our solar system and nearest to the Sun, Mercury is only slightly larger than Earth's Moon.
+    Mercury's surface temperatures are both extremely hot and cold. Because the planet is so close to the Sun, day temperatures can reach highs of 800°F (430°C). Without an atmosphere to retain that heat at night, temperatures can dip as low as -290°F (-180°C).`
     return mesh
 }
 

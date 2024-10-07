@@ -16,7 +16,8 @@ export function marsMeshBuilder() {
     //position will be replaced by xy csv coordinates
     mesh.position.set(5,0,0)
     mesh.name = "Mars"
-    mesh.userData = "this is the mars data"
+    mesh.userData = `The fourth planet from the Sun, Mars is a dusty, cold, desert world with a very thin atmosphere.
+    Mars was named by the ancient Romans for their god of war because its reddish color was reminiscent of blood. The Red Planet is actually many colors. At the surface we see colors such as brown, gold and tan. The reason Mars looks reddish is due to oxidization—or rusting—of iron in the rocks, regolith (Martian “soil”), and dust of Mars.`
     return mesh
 }
 

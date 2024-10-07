@@ -16,7 +16,8 @@ export function venusMeshBuilder() {
     //position will be replaced by xy csv coordinates
     mesh.position.set(5,0,0)
     mesh.name = "Venus"
-    mesh.userData = "this is the venus data"
+    mesh.userData = `Similar in size and structure to Earth, Venus has been called Earth's twin. These are not identical twins, however – there are radical differences between the two worlds.
+    Venus and Earth are similar in size, mass, density, composition, and gravity. There, however, the similarities end. Venus has a thick, toxic atmosphere filled with carbon dioxide and it’s perpetually shrouded in thick, yellowish clouds of mostly sulfuric acid that trap heat, causing a runaway greenhouse effect.`
     return mesh
 }
 

@@ -1,0 +1,17 @@
+#title {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    font-size: 24px;
+    font-family: 'Arial, sans-serif';
+    font-weight: bold;
+    background-color: black; /* Black background */
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounded corners */
+  }
+  
+  body {
+    margin: 0; /* Remove margin for fullscreen effect */
+    overflow: hidden; /* Remove scrollbars */
+  }

@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Planetary System Visualization</title>
   <style>body { margin: 0; overflow: hidden; }</style>
 </head>
 <body>
   <div id="container"></div>
-  <div id="infoArea" style="position:fixed; top:0; right:0; width:250px; height:100%; background-color:white; padding:20px; border-left:1px solid #ccc; display:none;">
-    <h2 id="infoTitle">Object Information</h2>
-    <p id="infoContent"></p>
+  <div id="title">Orrery-Nexus</div>
+  <div id="infoArea" style="position:fixed; top:0; right:0; width:250px; height:100%; background-color:black; padding:20px; border-left:1px solid #ccc; display:none;">
+    <h2 id="infoTitle" style="color: white">Object Information</h2>
+    <p id="infoContent" style="color: white"></p>
+    <hr>
+    <p style="color: white">NASA (Eyes on the solar system)</p>
     <button id="closeButton">Close</button>
   </div>
   <script type="module" src="main.js"></script>
